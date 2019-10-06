@@ -6,7 +6,6 @@ use \ulole\core\classes\Response;
 class UserController {
 
     public static function login() {
-        echo \json_encode(\app\classes\User::getUserInformation($_GET["userkey"]));
         if (isset($_GET["userkey"])) {
             if (\app\classes\User::getUserInformation($_GET["userkey"]) !== false) {
                 $key = \app\classes\User::getUserInformation($_GET["userkey"])->userkey;
