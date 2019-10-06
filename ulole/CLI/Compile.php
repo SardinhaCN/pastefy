@@ -17,6 +17,8 @@ class Compile {
 
     public static function compileViews($dir, $enddir) {
         $replaceArray = [
+            "{[{"=>'<?php echo htmlspecialchars(',
+            "}]}"=>'); ?>',
             "{{"=>'<?php echo (',
             "}}"=>'); ?>',
             
@@ -59,3 +61,4 @@ class Compile {
         }
     } 
 }
+

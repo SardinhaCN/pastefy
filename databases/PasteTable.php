@@ -1,10 +1,10 @@
 <?php
 namespace databases;
 
-use ulole\modules\ORM\Table;
+use modules\uloleorm\Table;
 class PasteTable extends Table {
 
-    public $id, // INSERT YOUR ROWS IN HERE 
+    public $id,  
            $title,
            $content,
            $created,
@@ -13,8 +13,9 @@ class PasteTable extends Table {
            $encrypted,
            $folder;
     
-    public function __construct() {
+    public function database() {
         $this->_table_name_ = "paste";
+        $this->__database__ = "main";
     }
 
 }

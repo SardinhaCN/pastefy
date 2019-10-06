@@ -1,17 +1,15 @@
 {
-    "name":"MyApp",
-    "version": "1.0",
+    "name":"Pastefy",
+    "version": "4.1",
     "authors": [
         {
-            "name": "My Name",
-            "email": "my@mail.com"
+            "name": "JulianFun123"
         }
     ],
+    "debug": "justtestserver",
     "options": {
-        "use_mysql": true,
-
-
         "defaultlang": "en",
         "detectlanguage": false
     }
+
 }

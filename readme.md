@@ -9,9 +9,15 @@ Pastefy is an Open Source self-hosted Pastebin/GithubGist alternative.
 # Updates
 
 ## v4
+
+## 4.1
+```
+Updated ULOLE (Migration Support for databases!)
+```
+
 ## 4
 ```
-Completly recoded and redesigned. 
+Completly recoded and redesigned. (+ Bug fixes)
 ```
 
 ## v3

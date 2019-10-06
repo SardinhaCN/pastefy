@@ -1,10 +1,8 @@
 <?php
 namespace databases\migrate;
 
-use ulole\modules\ORM\migrate\Migrate;
-/*
-    ULOLE MIGRATIONS WILL BE ADDED SOON!
-*/
+use modules\uloleorm\migrate\Migrate;
+
 class PasteTable extends Migrate {
     public function database() {
         $this->create('paste', function($table) {

@@ -1,6 +1,5 @@
 <?php
-
-namespace ulole\modules\ORM;
+namespace modules\uloleorm;
 
 class Delete extends Selector {
     public $that,

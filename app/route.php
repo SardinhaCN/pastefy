@@ -42,3 +42,5 @@ $router->get("/([a-zA-Z0-9]*)/raw", "!PasteController@rawPaste");
 
 $router->get("/delete:folder/([a-zA-Z0-9]*)", "!DeleteController@deleteFolder");
 $router->get("/delete:paste/([a-zA-Z0-9]*)", "!DeleteController@deletePaste");
+
+$router->set($route);

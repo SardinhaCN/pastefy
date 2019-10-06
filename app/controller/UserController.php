@@ -1,7 +1,7 @@
 <?php
 namespace app\controller;
 
-
+use \ulole\core\classes\Response;
 
 class UserController {
 
@@ -14,18 +14,9 @@ class UserController {
                 $newUser->login();
                 \setcookie("InteraApps_auth", $newUser->session, time()+1593600, "/");
                 
-                self::redirect('/');
+                Response::redirect('/');
             }
         }        
     }
 
-
-    public static function redirect($link) {
-		echo "<title>Redirecting to ".$link."</title>";
-		echo '<meta http-equiv="refresh" content="0;url='.$link.'">';
-		echo "<script>window.location.replace('",$link,"')</script>";
-        echo "<a href='".$link."'CLICK HERE</title>";
-        header("Location: ".$link);
-        exit();
-    }
 }

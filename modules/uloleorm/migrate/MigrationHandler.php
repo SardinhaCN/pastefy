@@ -1,6 +1,5 @@
 <?php
-
-namespace ulole\modules\ORM\migrate;
+namespace modules\uloleorm\migrate;
 
 /**
  * Handle Migrations

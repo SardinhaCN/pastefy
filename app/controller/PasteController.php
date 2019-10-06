@@ -3,9 +3,10 @@ namespace app\controller;
 
 use app\classes\User;
 use \databases\PasteTable;
+use \ulole\core\classes\Response;
+use \ulole\core\classes\util\Str;
 use \ulole\core\classes\util\secure\AES;
 use \ulole\core\classes\util\secure\Hash;
-use \ulole\core\classes\util\Str;
 use \ulole\core\classes\util\cookies\Cookies;
 use \ulole\core\classes\util\cookies\CookieBuilder;
 
@@ -13,21 +14,22 @@ class PasteController {
 
     public static function openPaste() {
         global $_ROUTEVAR, $_GET;
+
         $pasteTable = new PasteTable;
-        if ($pasteTable->select('*')->where("id",$_ROUTEVAR[1])->run()->num_rows > 0) {
+        if (count(($pasteTable)->select('*')->where("id",$_ROUTEVAR[1])->get()) > 0) {
             $content = $pasteTable->select('*')->where("id",$_ROUTEVAR[1])->first();
-            $password = $content->id;
+            $password = $content["id"];
             if (Cookies::isset("\$_pastepw_".$_ROUTEVAR[1])) {
-                $password = $content->id.Cookies::get("\$_pastepw_".$_ROUTEVAR[1]);
+                $password = $content["id"].Cookies::get("\$_pastepw_".$_ROUTEVAR[1]);
             }
             if (User::loggedIn())
                 $user = User::getUserObject();
             \view("paste", [
-                "id"=>$content->id,
-                "pastetitle"=>\htmlspecialchars(AES::decrypt($content->title, $content->id)),
-                "code"=>\htmlspecialchars(AES::decrypt($content->content, $password)),
-                "mypaste"=>((new \databases\PasteTable)->select("userid")->where("id", $_ROUTEVAR[1])->first()->userid == (User::loggedIn() ? $user->id : "NOPE" ) ),
-                "needspassword"=>($content->password != "" && !Cookies::isset("\$_pastepw_".$_ROUTEVAR[1]))
+                "id"=>$content["id"],
+                "pastetitle"=>\htmlspecialchars(AES::decrypt($content["title"], $content["id"])),
+                "code"=>\htmlspecialchars(AES::decrypt($content["content"], $password)),
+                "mypaste"=>((new \databases\PasteTable)->select("userid")->where("id", $_ROUTEVAR[1])->first()["userid"] == (User::loggedIn() ? $user->id : "NOPE" ) ),
+                "needspassword"=>($content["password"] != "" && !Cookies::isset("\$_pastepw_".$_ROUTEVAR[1]))
             ]);
         } else
             \view("404");
@@ -36,14 +38,14 @@ class PasteController {
     public static function password() {
         global $_ROUTEVAR;
         $pasteTable = new PasteTable;
-        if ($pasteTable->select('*')->where("id",$_ROUTEVAR[1])->run()->num_rows > 0) {
+        if (count($pasteTable->select('*')->where("id",$_ROUTEVAR[1])->get()) > 0) {
             $content = $pasteTable->select('*')->where("id",$_ROUTEVAR[1])->first();
-            if ($content->password == Hash::sha512($_POST["password"])) {
+            if ($content["password"] == Hash::sha512($_POST["password"])) {
                 (new CookieBuilder(
                     "\$_pastepw_".$_ROUTEVAR[1], 
                     $_POST["password"]
                 ))->time(CookieBuilder::WEEK*4)->path("/")->build();
-                self::redirect("/".$_ROUTEVAR[1]);
+                Response::redirect("/".$_ROUTEVAR[1]);
             } else \view("error", ["message"=>"Password is invalid!"]);
         } else \view("404");
 
@@ -53,13 +55,13 @@ class PasteController {
         global $_ROUTEVAR, $_GET;
         $pasteTable = new PasteTable;
         $content = $pasteTable->select('id, content')->where("id",$_ROUTEVAR[1])->first();
-        $password = $content->id;
+        $password = $content["id"];
         if (Cookies::isset("\$_pastepw_".$_ROUTEVAR[1])) 
-            $password = $content->id.Cookies::get("\$_pastepw_".$_ROUTEVAR[1]);
+            $password = $content["id"].Cookies::get("\$_pastepw_".$_ROUTEVAR[1]);
         if (isset($_GET["password"]))
-            $password = $content->id.$_GET["password"];
-
-        return AES::decrypt($content->content, $password);
+            $password = $content["id"].$_GET["password"];
+        Response::setContentType("text/plain");
+        return AES::decrypt($content["content"], $password);
     }
 
     public static function createPaste() {
@@ -67,7 +69,7 @@ class PasteController {
         if ($_POST["content"] != "") {
             $id = (function() {
                 $id = Str::random(8);
-                while((new PasteTable)->select('id')->where("id",$id)->run()->num_rows > 0) {
+                while( count((new PasteTable)->select('id')->where("id",$id)->get()) > 0) {
                     $id = Str::random(8);
                 }
                 return $id;
@@ -79,8 +81,8 @@ class PasteController {
                 $folder = (new \databases\PasteFolderTable)->select("id")
                         ->where("userid", \app\classes\User::getUserObject()->id)
                         ->andwhere("id", $_POST["folder"]);
-                if ($folder->run()->num_rows > 0)
-                    $pasteTable->folder = $folder->first()->id;
+                if (count($folder->run()) > 0)
+                    $pasteTable->folder = $folder->first()["id"];
             }
 
             $pasteTable->title =  AES::encrypt($_POST["title"], $id);
@@ -93,8 +95,8 @@ class PasteController {
                 $pasteTable->userid = User::getUserObject()->id;
             }
             $pasteTable->save();
-            self::redirect("/".$id);
-        } else \view("error", ["message"=>"Title isn't set!"]);
+            Response::redirect("/".$id);
+        } else \view("error", ["message"=>"Please insert content!"]);
     }
 
     public static function redirect($link) {
@@ -106,11 +108,11 @@ class PasteController {
     }
 
     public static function pasteList() {
-        global $config_env;
+        global $ULOLE_CONFIG_ENV;
         if (User::usingIaAuth()) {
             $user = User::getUserObject();
-            if (!$user->valid) {
-                header("Location: ".$config_env->Auth->returnurl);
+            if (!$user || !$user->valid) {
+                header("Location: ".$ULOLE_CONFIG_ENV->Auth->returnurl);
                 die("");
             }
 

@@ -1,0 +1,15 @@
+{
+    "name": "uloleframework",
+    "version": "1.0",
+    "description": "Ulole-Framework is a php framework!",
+    "directory": "./",
+    "author": "InteraApps",
+    "keywords": [
+        "Framework",
+        "PHP"
+    ],
+    "modules": {
+        "interaapps/ulole-orm": ":github"
+    },
+    "namespaces": {}
+}

@@ -5,7 +5,7 @@
         <div id="web_contents">
             <form action="/p/login/<?php echo ($id); ?>" method="POST">
                 <a>This Paste is protected with a password!</a>
-                <input class="titleinput" type="text" name="password" placeholder="Folder">
+                <input class="titleinput" type="text" name="password" placeholder="Password">
                 <input class="submitbutton" type="submit" name="sub" value="Send">
             </form>
         </div>

@@ -1,7 +1,7 @@
 <?php
 namespace databases;
 
-use ulole\modules\ORM\Table;
+use modules\uloleorm\Table;
 class PasteFolderTable extends Table {
 
     public $id, // INSERT YOUR ROWS IN HERE 
@@ -10,8 +10,9 @@ class PasteFolderTable extends Table {
            $parent,
            $created;
     
-    public function __construct() {
+    public function database() {
         $this->_table_name_ = "pastefy_folder";
+        $this->__database__ = "main";
     }
 
 }

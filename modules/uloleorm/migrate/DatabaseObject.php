@@ -1,5 +1,5 @@
 <?php
-namespace ulole\modules\ORM\migrate;
+namespace modules\uloleorm\migrate;
 
 class DatabaseObject {
 
@@ -10,7 +10,9 @@ class DatabaseObject {
             $ai=false,
             $default=null,
             $defaultNull=false,
-            $collate=false;
+            $collate=false,
+            $custom="",
+            $currentTimestamp=false;
 
     public function __construct($fieldType, $fieldName) {
         $this->type = $fieldType;
@@ -29,6 +31,16 @@ class DatabaseObject {
 
     public function unique() {
         $this->unique = true;
+        return $this;
+    }
+
+    public function args($args) {
+        $this->custom = $args;
+        return $this;
+    }
+
+    public function currentTimestamp() {
+        $this->currentTimestamp = true;
         return $this;
     }
 

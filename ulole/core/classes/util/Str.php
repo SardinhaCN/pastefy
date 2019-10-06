@@ -25,6 +25,10 @@ class Str {
         return $this->string;
     }
 
+    public static function contains($val, $string) {
+        return strpos($string, $val) !== false;
+    }
+
     public function appendNewLine($string) {
         $this->string .= "\n".$string;
         return $this->string;
@@ -42,8 +46,7 @@ class Str {
         return \file_put_contents($path, $this->string);
     }
 
-    public static function random($length = 10) {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    public static function random($length = 10, $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ') {
         $charactersLength = strlen($characters);
         $randomString = '';
         for ($i = 0; $i < $length; $i++) {

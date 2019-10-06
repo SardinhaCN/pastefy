@@ -1,6 +1,5 @@
 <?php
-
-namespace ulole\modules\ORM;
+namespace modules\uloleorm;
 
 class Selector {
     function andwhere($sel1, $operator, $sel2=null) {
@@ -9,8 +8,12 @@ class Selector {
             $operator = "=";
         }
 
-        $this->query .= ' AND '.$this->con->real_escape_string($sel1).''.$operator.'"'.$this->con->real_escape_string($sel2).'"';
+        $this->query .= ' AND '.$this->escapeString($sel1).''.$operator.'"'.$this->escapeString($sel2).'"';
         return $this;
+    }
+
+    function escapeString($str) {
+        return str_replace('"', '\"', $str);
     }
 
     function orwhere($sel1, $operator, $sel2=null) {
@@ -19,7 +22,7 @@ class Selector {
             $operator = "=";
         }
 
-        $this->query .= ' OR '.$this->con->real_escape_string($sel1).''.$operator.'"'.$this->con->real_escape_string($sel2).'"';
+        $this->query .= ' OR '.$this->escapeString($sel1).''.$operator.'"'.$this->escapeString($sel2).'"';
         return $this;
     }
 
@@ -29,7 +32,7 @@ class Selector {
             $operator = "=";
         }
 
-        $this->query .= ' WHERE '.$this->con->real_escape_string($sel1).''.$operator.'"'.$this->con->real_escape_string($sel2).'"';
+        $this->query .= ' WHERE '.$this->escapeString($sel1).''.$operator.'"'.$this->escapeString($sel2).'"';
         return $this;
     }
 
