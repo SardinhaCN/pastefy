@@ -1,7 +1,7 @@
 <?php tmpl("header", ["title"=>"Paste"]); ?>
 <script>
 hljs.initHighlightingOnLoad();
-const embedLink = '<iframe width="100%" src="/api/v1/embed/<?php echo ($id); ?>" onload="this.style.height = this.contentWindow.document.body.scrollHeight + \'px\';" frameborder="0" allowfullscreen></iframe>';
+const embedLink = '<iframe width="100%" src="https://pastefy.ga/api/v1/embed/<?php echo ($id); ?>" onload="this.style.height = this.contentWindow.document.body.scrollHeight + \'px\';" frameborder="0" allowfullscreen></iframe>';
 </script>
 <div class="content">
     <?php if($needspassword):?>
