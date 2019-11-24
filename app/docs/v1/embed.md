@@ -5,7 +5,7 @@ Embed a paste
 
 ### Normal
 ```html
-<iframe width="100%" src="/api/v1/embed/yhl0ulmN" onload="this.style.height = this.contentWindow.document.body.scrollHeight + 'px';" frameborder="0" allowfullscreen></iframe>
+<iframe width="100%" src="https://pastefy.ga/api/v1/embed/yhl0ulmN" onload="this.style.height = this.contentWindow.document.body.scrollHeight + 'px';" frameborder="0" allowfullscreen></iframe>
 ```
 
 <iframe width="100%" src="/api/v1/embed/yhl0ulmN" onload="this.style.height = this.contentWindow.document.body.scrollHeight + 'px';" frameborder="0" allowfullscreen></iframe>
@@ -13,7 +13,7 @@ Embed a paste
 
 ### Light
 ```html
-<iframe width="100%" src="/api/v1/embed/yhl0ulmN?light" onload="this.style.height = this.contentWindow.document.body.scrollHeight + 'px';" frameborder="0" allowfullscreen></iframe>
+<iframe width="100%" src="https://pastefy.ga/api/v1/embed/yhl0ulmN?light" onload="this.style.height = this.contentWindow.document.body.scrollHeight + 'px';" frameborder="0" allowfullscreen></iframe>
 ```
 
 <iframe width="100%" src="/api/v1/embed/yhl0ulmN?light" onload="this.style.height = this.contentWindow.document.body.scrollHeight + 'px';" frameborder="0" allowfullscreen></iframe>
