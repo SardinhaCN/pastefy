@@ -459,11 +459,29 @@ body {
 
 
 
-.hljs {
+#snackbar {
+	background-color: #ffffff;
+	color: #17fc2e;
+	text-align: center;
+	border-radius: 3px;
+	padding: 16px 32px;
+	position: fixed;
+	bottom: 30px;
+	left: 50%;
+	transform: translate(-50%, 100%);
+	transition: 0.3s;
+	opacity: 0;
+  }
+  
+  #snackbar.show {
+	transform: translate(-50%, 0%);
+	transition: 0.5s;
+	opacity: 1;
+  }.hljs {
     display: block;
     overflow-x: auto;
     padding: 0.5em;
-    background: #262b39;
+    background: transparent;
   }
   
   .hljs,

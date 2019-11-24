@@ -4,7 +4,8 @@
     <div id="linksection">
         <a class="link1" href="https://interaapps.de/p/impressum">Imprint</a>
         <a href="http://interaapps.de/p/informationen" class="link1">Privacy</a>
-        <a href="http://developers.interaapps.de/" class="link1">Blog</a>
+        <a href="http://developers.interaapps.de/" class="link1">Blog</a> 
+        <a href="/docs/v1" class="link1">API Docs</a>
     </div>
 
     <a href="https://github.com/interaapps/pastefy" class="link1">Pastefy V4 @ Github</a>

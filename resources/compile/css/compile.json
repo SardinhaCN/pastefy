@@ -2,5 +2,9 @@
     "assets/css/app.css": [
         "app.css",
         "darkhighlight.css"
+    ],
+    "assets/css/highlight.css": [
+        "darkhighlight.css",
+        "embed.css"
     ]
 }

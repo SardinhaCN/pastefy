@@ -43,4 +43,18 @@ $router->get("/([a-zA-Z0-9]*)/raw", "!PasteController@rawPaste");
 $router->get("/delete:folder/([a-zA-Z0-9]*)", "!DeleteController@deleteFolder");
 $router->get("/delete:paste/([a-zA-Z0-9]*)", "!DeleteController@deletePaste");
 
+/* API */
+
+$router->get("/api/v1/embed/([a-zA-Z0-9]*)", "!api\\v1\\EmbedController@embed");
+
+$router->get("/api/v1/get/([a-zA-Z0-9]*)", "!api\\v1\PasteController@get");
+
+//Docs
+$router->get("/docs/v1/(.*)", "!docs\DocsV1Controller@page");
+$router->get("/docs/v1", function() {
+    $page = (new \modules\parsedown\Parsedown)->text(file_get_contents(\app\controller\docs\DocsV1Controller::PAGES[""]));
+    return view("docs/v1", ["doc"=>$page, "pages"=>\app\controller\docs\DocsV1Controller::PAGES_LINKS]); });
+
+
+
 $router->set($route);

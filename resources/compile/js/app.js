@@ -15,29 +15,20 @@ function copyStringToClipboard(str) {
     document.body.removeChild(el);
  }
  
- // Checks scroll to add Shadow to the navbar
- /*function checkScroll() {
-     
-     if (window.pageYOffset > 1) {
-         nav.style.background = "rgba(51, 51, 68, 1)";
-         nav.style.boxShadow = " 0px -38px 18px 34px rgba(0,0,0,0.55)";
-     }
-     else {
-         nav.style.background = "rgba(51, 51, 68, 0.5)";
-         nav.style.boxShadow = "0px 7px 17px -10px rgba(0,0,0,0)";
-     }
- 
- 
- }
- $(document).ready(function() {
-     var nav = $("#nav");
-     var navmenu = document.getElementById("navmenu");
-     checkScroll();
-     window.onscroll = function() {
-         checkScroll();
-     };
- });
- */
+
+  let snackBarTimeout;
+  
+  function showSnackBar(text, color="#17fc2e", background="#212531") {
+    const snackbar = document.querySelector('#snackbar');
+    snackbar.textContent = text;
+    snackbar.style.color = color;
+    snackbar.style.backgroundColor = background;
+    snackbar.classList.add('show');
+    clearTimeout(snackBarTimeout);
+    snackBarTimeout = setTimeout(() => {
+      snackbar.classList.remove('show');
+    }, 1500);
+  }
  
  function openNav() {
      //if (screen.width <= 720) {
@@ -51,3 +42,9 @@ function copyStringToClipboard(str) {
      document.getElementById("navbar").style.width = "0px";
  }
  
+ $(document).ready(function(){
+    let s = document.createElement('div');
+    s.id = 'snackbar';
+    s.textContent = 'done';
+    document.body.append(s);
+ });
