@@ -20,9 +20,7 @@ if (isset($_GET["light"]))
 <script>hljs.initHighlightingOnLoad();</script>
 <div id="code">
     <h2>{[{$paste["title"]}]}</h2>
-    <pre><code id="copyRaw">
-        {[{$paste["content"]}]}
-    </pre></code>
+    <pre><code id="copyRaw">{[{$paste["content"]}]}</pre></code>
     <div id="toolbar">
         <a id="copyBtn" onClick='copyStringToClipboard(document.getElementById("copyRaw").textContent);'><i class="material-icons">content_copy</i></a> 
         <a target="_blank" href="https://pastefy.ga/{[{ $paste["id"] }]}/raw">Raw</a> 

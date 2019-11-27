@@ -1,6 +1,6 @@
 {
     "assets/js/app.js": [
-        "jquery.js",
+        "jdom.js",
         "cajax.js",
         "app.js"
     ],

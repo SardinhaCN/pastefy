@@ -56,5 +56,8 @@ $router->get("/docs/v1", function() {
     return view("docs/v1", ["doc"=>$page, "pages"=>\app\controller\docs\DocsV1Controller::PAGES_LINKS]); });
 
 
+// Language features
+$router->post("/api/v1/language/markdown", "!language\MarkdownLanguageController@markdown");
+
 
 $router->set($route);

@@ -88,8 +88,9 @@ class PasteController {
             }
 
             $pasteTable->title =  AES::encrypt($_POST["title"], $id);
-            if ($_POST["password"] != "")
+            if (isset($_POST["password"]) && $_POST["password"] != "")
                 $pasteTable->password = Hash::sha512($_POST["password"]);
+
             $pasteTable->content = AES::encrypt($_POST["content"], $id.((isset($_POST["password"])) ? $_POST["password"] : ""));
             $pasteTable->created = date("Y-m-d H:i:s");
             $pasteTable->encrypted = "1";

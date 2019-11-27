@@ -17,7 +17,7 @@
 
     <h2>Folder</h2>
     <?php foreach($folder as $obj):?>
-        <a class="pasteList_paste_href" href="/folder/<?php echo ( $obj->id ); ?>"><div class="pasteList_paste_main">    
+        <a class="pasteList_paste_href" href="/folder/<?php echo ( $obj["id"] ); ?>"><div class="pasteList_paste_main">    
             <p class="pasteList_paste_title"><?php echo ( $obj["name"] ); ?></p>
             <p class="pasteList_paste_date"><?php echo ( htmlspecialchars($obj["created"]) ); ?></p>
         </div>

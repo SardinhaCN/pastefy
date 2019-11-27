@@ -17,7 +17,7 @@
 
     <h2>Folder</h2>
     @foreach(($folder as $obj))#
-        <a class="pasteList_paste_href" href="/folder/{{ $obj->id }}"><div class="pasteList_paste_main">    
+        <a class="pasteList_paste_href" href="/folder/{{ $obj["id"] }}"><div class="pasteList_paste_main">    
             <p class="pasteList_paste_title">{{ $obj["name"] }}</p>
             <p class="pasteList_paste_date">{{ htmlspecialchars($obj["created"]) }}</p>
         </div>

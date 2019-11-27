@@ -136,7 +136,7 @@ text-decoration: none;
 color: #DDDDDD;
 }
 
-#pastecode {
+.pastecode {
 	border-radius: 10px;
 	padding: 10px;
 	background: #262b39;
@@ -157,7 +157,7 @@ color: #DDDDDD;
 }
 
 
-#pastecode pre {
+.pastecode pre {
 	min-height: 50px;
 }
 

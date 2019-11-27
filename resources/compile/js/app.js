@@ -18,7 +18,7 @@ function copyStringToClipboard(str) {
 
   let snackBarTimeout;
   
-  function showSnackBar(text, color="#17fc2e", background="#212531") {
+  function showSnackBar(text, color="#17fc2e", background="#222530") {
     const snackbar = document.querySelector('#snackbar');
     snackbar.textContent = text;
     snackbar.style.color = color;

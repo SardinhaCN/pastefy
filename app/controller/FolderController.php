@@ -56,7 +56,7 @@ class FolderController {
                 $newFolder->created = date("Y-m-d H:i:s");
                 $newFolder->save();
             }
-            self::redirect("/".(( isset($_POST["camefrom"]) ) ? $_POST["camefrom"] : "" ));
+            Response::redirect("/".(( isset($_POST["camefrom"]) ) ? $_POST["camefrom"] : "" ));
         }
 
     }
