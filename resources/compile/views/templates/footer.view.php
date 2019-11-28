@@ -2,13 +2,21 @@
 <div id="footer">
     <img height="50px" src="/assets/images/icon.png" />
     <div id="linksection">
-        <a class="link1" href="https://interaapps.de/p/impressum">Imprint</a>
-        <a href="http://interaapps.de/p/informationen" class="link1">Privacy</a>
-        <a href="http://developers.interaapps.de/" class="link1">Blog</a> 
-        <a href="/docs/v1" class="link1">API Docs</a>
+        <?#
+        global $ULOLE_CONFIG;
+        ?>
+
+        @if((isset($ULOLE_CONFIG->footer_links)))#
+            @foreach(($ULOLE_CONFIG->footer_links as $name=>$page))#
+                @if(($page == "__br__"))#
+                    <br>
+                @else
+                    <a class="link1" href="{{$page}}">{{$name}}</a>
+                @endif
+            @endforeach
+        @endif
     </div>
 
-    <a href="https://github.com/interaapps/pastefy" class="link1">Pastefy V4 @ Github</a>
 </div>
 
 </body>
