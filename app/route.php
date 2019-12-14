@@ -23,7 +23,7 @@ $router->get("/", "homepage.php");
 $router->get("/folder/", "404.php");
 $router->get("/pasteList", "!PasteController@pasteList");
 
-$router->get("/user:login", "!UserController@login");
+$router->get("/user/login", "!UserController@login");
 
 $router->post("/create:folder", "!FolderController@createFolder");
 $router->post("/create:paste", "!PasteController@createPaste");
