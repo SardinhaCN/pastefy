@@ -33,7 +33,7 @@ class jdom {
             [].forEach.call(this.elem, func);
     }
 
-    getFitstElement() {
+    getFirstElement() {
         if (this.usign == "htmlelement")
             return this.elem;
         else if (typeof this.elem[0] != 'undefined')
@@ -41,9 +41,10 @@ class jdom {
         return undefined;
     }
 
+
     html(html) {
     	if (typeof html == 'undefined') {
-            var element = this.getFitstElement();
+            var element = this.getFirstElement();
     	    if (typeof element !== 'undefined')
                 return element.innerHTML;
             return "";
@@ -55,7 +56,7 @@ class jdom {
 
     text(text) {
         if (typeof text == 'undefined') {
-            var element = this.getFitstElement();
+            var element = this.getFirstElement();
             if (typeof element !== 'undefined')
                 return element.innerText;
             return "";
@@ -67,7 +68,7 @@ class jdom {
 
     css(css={}, alternativeValue=undefined) {
         if (typeof css == "string" && typeof alternativeValue == 'undefined') {
-            var element = this.getFitstElement();
+            var element = this.getFirstElement();
             if (typeof element.style[css] !== 'undefined')
                 return element.style[css];
             return "";
@@ -85,7 +86,7 @@ class jdom {
 
     attr(attributes={}, alternativeValue=undefined) {
         if (typeof attributes == "string" && typeof alternativeValue == 'undefined') {
-            var element = this.getFitstElement();
+            var element = this.getFirstElement();
 
             if (typeof element !== 'undefined')
                 return element.getAttribute(attributes);
@@ -124,7 +125,7 @@ class jdom {
 
     id(name) {
         if (typeof name == 'undefined') {
-            var element = this.getFitstElement();
+            var element = this.getFirstElement();
             if (typeof element !== 'undefined')
                 return element.id;
         } else {
@@ -137,7 +138,7 @@ class jdom {
 
     val(value) {
         if (typeof value == 'undefined') {
-            var element = this.getFitstElement();
+            var element = this.getFirstElement();
             if (typeof element !== 'undefined')
                 return element.value;
         } else {
@@ -161,6 +162,24 @@ class jdom {
             var outerThis = this;
             this.each( function (element) {
                 outerThis.html(outerThis.html() + append);
+            });
+        }
+        return this;
+    }
+    
+    prepend(prepend) {
+        if (prepend instanceof HTMLElement)
+            this.each( function (element) {
+                element.prepend(prepend);
+            });
+        else if (prepend instanceof jdom)
+            this.each( function (element) {
+                element.prepend(prepend.elem);
+            });
+        else {
+            var outerThis = this;
+            this.each( function (element) {
+                outerThis.html(prepend+outerThis.html());
             });
         }
         return this;
@@ -193,9 +212,47 @@ class jdom {
     }
     
     click(func){ 
-        this.on('click', func);
+        if (typeof func != 'undefined')
+            this.on('click', func);
+        else
+            (this.getFirstElement()).click();
+
         return this;
     }
+    
+    contextmenu(func) { return this.on('contextmenu', func); }
+    change(func) { return this.on('change', func); }
+    mouseover(func) { return this.on('mouseover', func); }
+    keypress(func) { return this.on('keypress', func); }
+    keyup(func) { return this.on('keyup', func); }
+    keydown(func) { return this.on('keydown', func); }
+    dblclick(func) { return this.on('dblclick', func); }
+    resize(func) { return this.on('resize', func); }
+
+    timeupdate(func) { return this.on('timeupdate', func); }
+    touchcancle(func) { return this.on('touchcancle', func); }
+    touchend(func) { return this.on('touchend', func); }
+    touchmove(func) { return this.on('touchmove', func); }
+    touchstart(func) { return this.on('touchstart', func); }
+
+    drag(func) { return this.on('drag', func); }
+    dragenter(func) { return this.on('dragenter', func); }
+    dragleave(func) { return this.on('dragleave', func); }
+    dragover(func) { return this.on('dragover', func); }
+    dragend(func) { return this.on('dragend', func); }
+    dragstart(func) { return this.on('dragstart', func); }
+    drop(func) { return this.on('drop', func); }
+
+    focus(func) { return this.on('focus', func); }
+    focusout(func) { return this.on('focusout', func); }
+    focusin(func) { return this.on('focusin', func); }
+    invalid(func) { return this.on('invalid', func); }
+    popstate(func) { return this.on('popstate', func); }
+    volumechange(func) { return this.on('volumechange', func); }
+    unload(func) { return this.on('unload', func); }
+    offline(func) { return this.on('offline', func); }
+    online(func) { return this.on('online', func); }
+    focus(func) { return this.on('focus', func); }
 
     ready(func) {
         this.on('DOMContentLoaded', func);
@@ -267,6 +324,37 @@ if (typeof $n != 'undefined')
 if (typeof $$ != 'undefined')
     var _$$beforeJdom = $$;
 
+$jdomfn = function(name, func){
+	jdom.prototype[name] = func;
+}
+
+$jdomGetter = function(varName){
+	varNameArray = varName.split("");
+	if (varNameArray[0] !== undefined)
+		varNameArray[0] = varName[0].toUpperCase();
+	var out = "";
+	for (letter in varNameArray)
+		out += varNameArray[letter];
+	jdom.prototype["get"+out] = function(){
+		return this.getFirstElement()[varName];
+	}
+}
+
+$jdomSetter = function(varName){
+	varNameArray = varName.split("");
+	if (varNameArray[0] !== undefined)
+		varNameArray[0] = varName[0].toUpperCase();
+	var out = "";
+	for (letter in varNameArray)
+		out += varNameArray[letter];
+	jdom.prototype["set"+out] = function(value){
+		this.each(function(elem){
+			elem[varName] = value;
+		});
+		return this;
+	}
+}
+
 var $ = function(element){
     return (new jdom(element));
 }
@@ -282,6 +370,8 @@ var $n = function(element="div"){
 var $$ = function (element) {
     return document.querySelectorAll(element);
 }
+
+
 if ( typeof module === "object" && typeof module.exports === "object" ) {
     module.exports = $;
 }

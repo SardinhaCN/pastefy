@@ -32,11 +32,16 @@
 <div id="nav">
     <div id="logo"><a href="/"><img src="/assets/images/logo.png" /></a></div>
     <div id="nav_menu">
+        <a href="/" class="nav_link" id="create_new_paste">New paste</a>
+        <div id="short_new_paste" style="display:none;">
+            <h2>Create a new paste</h2>
+            @view(("components/createpaste", ["cp_id"=>"short_new_paste"]))!
+        </div>
         @if((\app\classes\User::usingIaAuth()))#
             @if((\app\classes\User::loggedIn()))#
                 <a href="/pasteList" class="nav_link"><img style="border: solid {{ htmlspecialchars(\app\classes\User::getUserObject()->color) }} 2px;" id="profilepicture" src="{{ htmlspecialchars(\app\classes\User::getUserObject()->profilepic) }}" /></a>
             @else
-                <a href="/pasteList" class="nav_link">Login</a>
+                <a href="/pasteList" id="login_btn" class="nav_link"><span>Login</span> <img src="https://interaapps.de/assets/interaapps/icon/icon3.svg"></a>
             @endif
         @else
         @endif

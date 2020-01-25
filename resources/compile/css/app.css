@@ -478,3 +478,46 @@ body {
 	transition: 0.5s;
 	opacity: 1;
   }
+
+  #short_new_paste {
+	background: #181b24;
+	position: fixed;
+	top: 70px;
+	right: 30px;
+	border-radius: 10px;
+	padding: 10px;
+	box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 6px 1px;
+	color: #FFF;
+  }
+
+  #short_new_paste h2 {	
+	color: #FFFFFF;
+	font-weight: 400;
+	margin-bottom: 7px;
+  }
+
+  #create_new_paste {
+	vertical-align: top;
+	cursor: pointer;
+	background: #324354;
+    padding: 6px 10px;
+    border-radius: 5px;
+  }
+
+  #login_btn {
+	background: #4c749c;
+    padding: 6px 10px;
+    border-radius: 5px;
+  }
+
+  #login_btn img {
+	width: 17px;
+	vertical-align: middle;
+	margin-bottom: 2px;
+  }
+
+  @media screen and (max-width: 380px) {
+	  #logo img {
+		content:url("/assets/images/icon.png");
+	  }
+  }

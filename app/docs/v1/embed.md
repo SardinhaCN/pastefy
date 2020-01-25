@@ -5,18 +5,18 @@ Embed a paste
 
 ### Normal
 ```html
-<iframe width="100%" src="https://pastefy.ga/api/v1/embed/yhl0ulmN" onload="this.style.height = this.contentWindow.document.body.scrollHeight + 'px';" frameborder="0" allowfullscreen></iframe>
+<iframe width="100%" src="https://pastefy.ga/api/v1/embed/tV5N4Vwa" onload="this.style.height = this.contentWindow.document.body.scrollHeight + 'px';" frameborder="0" allowfullscreen></iframe>
 ```
 
-<iframe width="100%" src="/api/v1/embed/yhl0ulmN" onload="this.style.height = this.contentWindow.document.body.scrollHeight + 'px';" frameborder="0" allowfullscreen></iframe>
+<iframe width="100%" src="/api/v1/embed/tV5N4Vwa" onload="this.style.height = this.contentWindow.document.body.scrollHeight + 'px';" frameborder="0" allowfullscreen></iframe>
 
 
 ### Light
 ```html
-<iframe width="100%" src="https://pastefy.ga/api/v1/embed/yhl0ulmN?light" onload="this.style.height = this.contentWindow.document.body.scrollHeight + 'px';" frameborder="0" allowfullscreen></iframe>
+<iframe width="100%" src="https://pastefy.ga/api/v1/embed/tV5N4Vwa?light" onload="this.style.height = this.contentWindow.document.body.scrollHeight + 'px';" frameborder="0" allowfullscreen></iframe>
 ```
 
-<iframe width="100%" src="/api/v1/embed/yhl0ulmN?light" onload="this.style.height = this.contentWindow.document.body.scrollHeight + 'px';" frameborder="0" allowfullscreen></iframe>
+<iframe width="100%" src="/api/v1/embed/tV5N4Vwa?light" onload="this.style.height = this.contentWindow.document.body.scrollHeight + 'px';" frameborder="0" allowfullscreen></iframe>
 
 <div class="article_creator">
     <img src="https://accounts.interaapps.de/userpbs/JulianFun123.png" />
