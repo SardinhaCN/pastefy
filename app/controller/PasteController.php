@@ -56,6 +56,7 @@ class PasteController {
         global $_ROUTEVAR, $_GET;
 
         Response::setContentType("text/plain");
+        Response::setHeader("access-control-allow-origin", "*");
         $password = null;
         if (isset($_GET["password"])) 
             $password = $_GET["password"];
