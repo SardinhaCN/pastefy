@@ -32,6 +32,22 @@ const embedLink = '<iframe width="100%" src="https://pastefy.ga/api/v1/embed/<?p
 
 <script>
 
+if ($("#paste_title").text().includes(".")) {
+    var pasteTitleComponents = $("#paste_title").text().split(".");
+    var ending = pasteTitleComponents[pasteTitleComponents.length-1];
+    var replacements = {
+        "js": "javascript",
+        "md": "markdown"
+    };
+    for (replace  in replacements)
+        ending = ending.replace(replace, replacements[replace]);
+    
+    if (hljs.listLanguages().includes(ending)) {
+        $("#copyRaw code").getFirstElement().className = "hljs language-"+ending;
+        //$("#copyRaw code").addClass("language-html", ending);
+    }
+}
+
 var language = "text";
 
 var markdowned = false;
@@ -41,7 +57,7 @@ function setLanguageFeatured(lang){
     language = lang;
 }
 
-function regreshFeaturedLanguage(){
+function refreshFeaturedLanguage(){
     const container = $("#language_feature_container");
     container.show();
 
@@ -57,25 +73,25 @@ function regreshFeaturedLanguage(){
 }
 
 addEventListener('load', function() {
-    if ($("code").getFitstElement().classList.contains("markdown")) {
+    if ($("code").getFirstElement().classList.contains("markdown") || $("code").getFirstElement().classList.contains("language-markdown")) {
         setLanguageFeatured("markdown");
     }
 
 
     $(".language_featured").click(function(){
-        regreshFeaturedLanguage();
+        refreshFeaturedLanguage();
     });
 
 
 
     if (window.location.hash == "#preview")
-        $(".language_featured").getFitstElement().click();
+        $(".language_featured").getFirstElement().click();
     else if (window.location.hash == "#md_preview") {
         setLanguageFeatured("markdown");
-        regreshFeaturedLanguage();
+        refreshFeaturedLanguage();
     } else if (window.location.hash == "#only_md_preview") {
         setLanguageFeatured("markdown");
-        regreshFeaturedLanguage();
+        refreshFeaturedLanguage();
         $("#paste_code_container").hide();
     }
 });
