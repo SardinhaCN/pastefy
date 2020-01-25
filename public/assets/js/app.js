@@ -544,7 +544,6 @@ function copyStringToClipboard(str) {
     });
 
     $(window).click(function(e){
-        console.log(e)
         if (window.innerWidth >= 720 && e.target.id != "create_new_paste") {
             if ($("#short_new_paste").css("display") == "block"){
                 event.preventDefault();
@@ -554,9 +553,10 @@ function copyStringToClipboard(str) {
     });
 
     $(window).keydown(function(e){
-        if (e.key == "Escape" && $("#short_new_paste").css("display") == "block") {
+        if (e.key == "Escape" && $("#short_new_paste").css("display") == "block")
             $("#short_new_paste").css("display", "none");
-        }
+        else if (e.key == "N" && $("#short_new_paste").css("display") == "none") // Open the new paste window
+            $("#short_new_paste").css("display", "block");
     });
 
     $("#create_new_paste").click(function(e){
