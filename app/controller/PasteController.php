@@ -41,6 +41,7 @@ class PasteController {
         if (count($pasteTable->select('*')->where("id",$_ROUTEVAR[1])->get()) > 0) {
             $content = $pasteTable->select('*')->where("id",$_ROUTEVAR[1])->first();
             if ($content["password"] == Hash::sha512($_POST["password"])) {
+                // Yes... passwords will be saved as cookie. The reason is, that we don't want to save encryption-keys on servers.
                 (new CookieBuilder(
                     "\$_pastepw_".$_ROUTEVAR[1], 
                     $_POST["password"]
@@ -100,14 +101,6 @@ class PasteController {
             $pasteTable->save();
             Response::redirect("/".$id);
         } else \view("error", ["message"=>"Please insert content!"]);
-    }
-
-    public static function redirect($link) {
-		echo "<title>Redirecting to ".$link."</title>";
-		header("Location: ".$link);
-		echo '<meta http-equiv="refresh" content="0;url='.$link.'">';
-		echo "<script>window.location.replace('",$link,"')</script>";
-		echo "<a href='".$link."'CLICK HERE</title>";
     }
 
     public static function pasteList() {

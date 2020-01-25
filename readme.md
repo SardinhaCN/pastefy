@@ -5,10 +5,24 @@
 #  Pastefy 4.0
 Pastefy is an Open Source self-hosted Pastebin/GithubGist alternative.
 
+# Contributing
+Feel free to improve Pastefy by adding stuff to the code or writing some Github-Issues.
+
+To change something to the code you'll need:
+- Knowledge about PHP
+- Can work with the [UloleFramework](https://github.com/interaapps/ulole-framework)
+- PHP 7.3 CLI installed on your system
+
+We are using ulole-framework compile. You have to type `php cli compile`  in a terminal to compile the resources in the `resource/compile` folder. To test your code you have to start the ulole-framework server `php cli server`. We do not support composer dependencies! Just [UPPM](https://github.com/interaapps/uppm) ones
 
 # Updates
 
 ## v4
+
+## 4.2
+```
+Added short paste and changed some design-details!
+```
 
 ## 4.1
 ```
