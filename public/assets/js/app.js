@@ -555,7 +555,7 @@ function copyStringToClipboard(str) {
     $(window).keydown(function(e){
         if (e.key == "Escape" && $("#short_new_paste").css("display") == "block")
             $("#short_new_paste").css("display", "none");
-        else if (e.key == "N" && $("#short_new_paste").css("display") == "none") // Open the new paste window
+        else if (e.key == "N" && window.location.pathname != "/" && $("#short_new_paste").css("display") == "none") // Open the new paste window
             $("#short_new_paste").css("display", "block");
     });
 
