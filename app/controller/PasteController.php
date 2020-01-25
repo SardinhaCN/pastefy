@@ -113,7 +113,7 @@ class PasteController {
             }
 
             $folder = (new \databases\PasteFolderTable)->select("*")->where("userid", $user->id)->andwhere("parent", "")->order("created DESC")->get();
-            $pastes = (new PasteTable)->select("*")->where("userid", $user->id)->order("created DESC")->get();
+            $pastes = (new PasteTable)->select("*")->where("userid", $user->id)->andwhere("folder","")->order("created DESC")->get();
 
 
             \view("pastelist", [

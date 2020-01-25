@@ -37,7 +37,17 @@ if ($("#paste_title").text().includes(".")) {
     var ending = pasteTitleComponents[pasteTitleComponents.length-1];
     var replacements = {
         "js": "javascript",
-        "md": "markdown"
+        "md": "markdown",
+        "sh": "shell",
+        "html": "xml",
+        "htaccess": "apache",
+        "c": "objectivec",
+        "hack": "php",
+        "coffee": "coffeescript",
+        "c++": "cpp",
+        "kotlin": "java",
+        "kt": "java"
+
     };
     for (replace  in replacements)
         ending = ending.replace(replace, replacements[replace]);
