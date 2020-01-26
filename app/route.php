@@ -45,6 +45,11 @@ $router->get("/delete:paste/([a-zA-Z0-9]*)", "!DeleteController@deletePaste");
 
 /* API */
 
+$router->get("/dev/console", "!api\developers\DeveloperConsoleController@page");
+$router->get("/dev/console/ls", "!api\developers\DeveloperConsoleController@list");
+$router->post("/dev/console/newkey", "!api\developers\DeveloperConsoleController@createNewKey");
+$router->post("/dev/console/deletekey", "!api\developers\DeveloperConsoleController@deleteKey");
+
 $router->get("/api/v1/embed/([a-zA-Z0-9]*)", "!api\\v1\\EmbedController@embed");
 
 $router->get("/api/v1/get/([a-zA-Z0-9]*)", "!api\\v1\PasteController@get");

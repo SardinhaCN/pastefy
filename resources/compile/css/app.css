@@ -9,6 +9,10 @@ body {
 	background: #1a1e27;
 }
 
+h1,h2,h3,h4,h5 {
+	font-weight: 400;
+}
+
 
 .contentinput {
 	border: none;
