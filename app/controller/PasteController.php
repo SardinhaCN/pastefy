@@ -65,42 +65,26 @@ class PasteController {
 
         if ($pasteContents["exists"])
             return $pasteContents["content"];
-        else return "Not found";
+        else
+            return "Not found";
     }
 
     public static function createPaste() {
         global $_POST;
         if ($_POST["content"] != "") {
-            $id = (function() {
-                $id = Str::random(8);
-                while( count((new PasteTable)->select('id')->where("id",$id)->get()) > 0) {
-                    $id = Str::random(8);
-                }
-                return $id;
-            })();
-            $pasteTable = new PasteTable;
-            $pasteTable->id = $id;
+            $paste = new Paste;
+            $paste->setContent($_POST["content"]);
 
-            if (isset($_POST["folder"]) && ((\app\classes\User::usingIaAuth()) ? \app\classes\User::loggedIn() : false)) {
-                $folder = (new \databases\PasteFolderTable)->select("id")
-                        ->where("userid", \app\classes\User::getUserObject()->id)
-                        ->andwhere("id", $_POST["folder"]);
-                if (count($folder->run()) > 0)
-                    $pasteTable->folder = $folder->first()["id"];
-            }
-
-            $pasteTable->title =  AES::encrypt($_POST["title"], $id);
-            if (isset($_POST["password"]) && $_POST["password"] != "")
-                $pasteTable->password = Hash::sha512($_POST["password"]);
-
-            $pasteTable->content = AES::encrypt($_POST["content"], $id.((isset($_POST["password"])) ? $_POST["password"] : ""));
-            $pasteTable->created = date("Y-m-d H:i:s");
-            $pasteTable->encrypted = "1";
+            if (isset($_POST["title"]))
+                $paste->setTitle($_POST["title"]);
+            if (isset($_POST["folder"]))
+                $paste->setFolder($_POST["folder"]);
+            if (isset($_POST["password"]))
+                $paste->setPassword($_POST["password"]);
             if ( (\app\classes\User::usingIaAuth()) ? \app\classes\User::loggedIn() : false ){
-                $pasteTable->userid = User::getUserObject()->id;
+                $paste->setUser(User::getUserObject()->id);
             }
-            $pasteTable->save();
-            Response::redirect("/".$id);
+            Response::redirect("/".$paste->save());
         } else \view("error", ["message"=>"Please insert content!"]);
     }
 

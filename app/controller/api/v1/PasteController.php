@@ -1,8 +1,9 @@
 <?php
 namespace app\controller\api\v1;
 
+use databases\PastefyAPITable;
 use app\classes\Paste;
-use \ulole\core\classes\Response;
+use ulole\core\classes\Response;
 
 class PasteController {
 
@@ -18,6 +19,50 @@ class PasteController {
         if ($pasteContents["exists"])
             Response::json($pasteContents);
         else Response::json(["done"=>false]);
+    }
+
+    /**
+     * Creates a new paste.
+     * # API KEY REQUIRED
+     * 
+     * Required POST-Parameters:
+     *    apikey: Your api key
+     *    contents: Paste-Contents
+     * 
+     * Optional:
+     *    title:
+     *    password:   
+     *    folder: (Only folder by api-key creator)  
+     * 
+     * Learn more in Docs: app/docs/v1/create_paste.md
+     * */
+    public static function createPaste() : array {
+        Response::setHeader("access-control-allow-origin", "*");
+        $out = [
+            "done"=> false
+        ];
+
+        
+        if ( isset($_POST["content"]) && isset($_POST["apikey"]) ) {
+            $api = (new PastefyAPITable)->select()->first();
+            if ($api["id"] !== null && $_POST["content"] != "") {
+                $paste = new Paste;
+                $paste->setContent($_POST["content"]);
+
+                if (isset($_POST["title"]))
+                    $paste->setTitle($_POST["title"]);
+                if (isset($_POST["folder"]))
+                    $paste->setFolder($_POST["folder"]);
+                if (isset($_POST["password"]))
+                    $paste->setPassword($_POST["password"]);
+
+                $paste->setUser($api["userid"]);
+                $out["url"] = $paste->save();
+                $out["done"] = true;
+            }
+        }
+
+        return $out;
     }
 
 }

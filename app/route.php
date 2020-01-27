@@ -51,8 +51,8 @@ $router->post("/dev/console/newkey", "!api\developers\DeveloperConsoleController
 $router->post("/dev/console/deletekey", "!api\developers\DeveloperConsoleController@deleteKey");
 
 $router->get("/api/v1/embed/([a-zA-Z0-9]*)", "!api\\v1\\EmbedController@embed");
-
 $router->get("/api/v1/get/([a-zA-Z0-9]*)", "!api\\v1\PasteController@get");
+$router->post("/api/v1/create", "!api\\v1\PasteController@createPaste");
 
 //Docs
 $router->get("/docs/v1/(.*)", "!docs\DocsV1Controller@page");
