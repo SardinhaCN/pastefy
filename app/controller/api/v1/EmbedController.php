@@ -2,6 +2,7 @@
 namespace app\controller\api\v1;
 
 use app\classes\Paste;
+use ulole\core\classes\Response;
 
 class EmbedController {
 
