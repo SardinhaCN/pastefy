@@ -8,7 +8,6 @@ class EmbedController {
 
     public static function embed(){
         global $_ROUTEVAR, $_GET;
-        Response::setHeader("access-control-allow-origin", "*");
 
         $password = null;
         if (isset($_GET["password"])) 
