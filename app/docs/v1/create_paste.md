@@ -22,6 +22,7 @@
 | done |boolean| Returns true if the creation succeeded |
 | url |string(8)| Returns the ending of the url. The ID of the paste (For example: dcq0n99s) |
 
+
 ```json
 {
     "done": true,
