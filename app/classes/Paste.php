@@ -33,7 +33,7 @@ class Paste {
             $folder = (new \databases\PasteFolderTable)->select("id")
                     ->where("userid", \app\classes\User::getUserObject()->id)
                     ->andwhere("id", $this->folder);
-            if (count($folder->run()) > 0)
+            if (count($folder->get()) > 0)
                 $pasteTable->folder = $folder->first()["id"];
         }
 
