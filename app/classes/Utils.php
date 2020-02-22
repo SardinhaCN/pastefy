@@ -6,16 +6,19 @@ use \app\classes\User;
 class Utils {
 
     public static function getFolder() {
-        $out = [];
+    	if (User::loggedIn()) {
+		$out = [];
 
-        $folder = (new \databases\PasteFolderTable)->select("*")
-                        ->where("userid", User::getUserObject()->id)->get();
+		$folder = (new \databases\PasteFolderTable)->select("*")
+		                ->where("userid", User::getUserObject()->id)->get();
 
-        foreach($folder as $obj) {
-            $out[$obj["id"]] = self::getChildFolder($obj["name"], $obj["id"]);
+		foreach($folder as $obj) {
+		    $out[$obj["id"]] = self::getChildFolder($obj["name"], $obj["id"]);
+		}
+
+		return $out;
         }
-
-        return $out;
+        return "null";
     }
 
     public static function getChildFolder($parentName, $parentId) {
