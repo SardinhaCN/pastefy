@@ -27,7 +27,8 @@ class Table {
                 }
         }
         $query = "INSERT INTO `".$this->_table_name_."` (".$query_keys.") VALUES (".$query_values.");";
-        
+        echo json_encode($preparedValues);
+        die($query);
         $statement = $con->prepare($query);
         return $statement->execute($preparedValues);
     }

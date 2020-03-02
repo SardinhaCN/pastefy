@@ -15,8 +15,8 @@ class Paste {
     private $folder;
     private $title;
     private $content;
-    private $password = null;
-    private $user = null;
+    private $password = "";
+    private $user = "0";
 
     public function save() : string {
         $id = (function() {

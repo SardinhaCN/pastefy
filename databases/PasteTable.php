@@ -8,10 +8,10 @@ class PasteTable extends Table {
            $title,
            $content,
            $created,
-           $password,
-           $userid,
-           $encrypted,
-           $folder;
+           $password = "",
+           $userid = 0,
+           $encrypted = 0,
+           $folder = 0;
     
     public function database() {
         $this->_table_name_ = "paste";
